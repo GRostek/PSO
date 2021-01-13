@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 100px;
+    grid-auto-columns: 100px;
+    grid-gap: 10px;
+
+}
+
+.color-in {
+  grid-column-start: 1;
+  grid-row-start: 1;
+  grid-row-end: 3;
+  /*background-color: aqua;*/
+  display: grid;
+  grid-template-columns: repeat(4, 25%);
+  grid-template-rows: repeat(4,25%);
+  border: black;
+  border-style: solid;
+}
+.color-in2{
+    grid-gap:0px;
+    grid-column-start: 2;
+    grid-column-end: 4;
+    grid-row-start: 2;
+    grid-row-end: 4;
+    /*background-color: red;*/
+}
+
+.color-side{
+  grid-column-start: 1;
+  grid-row-start: 3;
+  grid-row-end: 5;
+  /*background-color: blue;*/
+  border: black;
+  border-style: solid;
+  display: grid;
+  grid-template-columns: repeat(4, 25%);
+  grid-template-rows: repeat(4,25%);
+}
+
+.color-side1{
+    grid-gap:0px;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 5;
+   /* background-color: red;*/
+}
+.color-side2{
+    grid-gap:0px;
+    grid-column-start: 3;
+    grid-column-end: 5;
+    grid-row-start: 1;
+    grid-row-end: 5;
+    /*background-color: pink;*/
+}
+
+.color-text{
+/*background-color: chartreuse;*/
+grid-row-start: 5;
+grid-row-end: 6;
+border: black;
+border-style: solid;
+text-align: center;
+}
+
+.sliders{
+    display: grid;
+    grid-template-columns: repeat(2,300px);
+    grid-column-gap: 0px;
+}
+
+.view-color1, .view-color2{
+    width: 20px;
+    height: 20px;
+    float: left;
+    margin: 5px;
+    border: 1px solid rgba(0, 0, 0, .2);
+}
+
+
+</style>
+</head>
+<body>
+    <div class="sliders">
+        <div class="color1">
+            <h5>Color1: <span class="view-color1" id="view-color1"></span> </h5>
+            <p>RED:<!--<span id="redValue"></span> -->
+                <input type=number min="0" max="255" value="255" id="redInput">
+                <input type="range" min="0" max="255" value="255" id="redSlider">
+            </p>
+            <p>GREEN:<!--<span id="greenValue"></span>-->
+                <input type=number min="0" max="255" value="255" id="greenInput">
+                <input type="range" min="0" max="255" value="255" id="greenSlider">
+            </p>
+            <p>BLUE:<!--<span id="blueValue"></span>-->
+                <input type=number min="0" max="255" value="255" id="blueInput">
+                <input type="range" min="0" max="255" value="255" id="blueSlider">
+            </p>
+        </div>
+        <div class="color2">
+            <h5>Color2: <span class="view-color2" id="view-color2"></span></h5>
+            <p>RED:<!--<span id="redValue2"></span>-->
+                <input type=number min="0" max="255" value="255" id="redInput2">
+                <input type="range" min="0" max="255" value="0" id="redSlider2">
+            </p>
+            <p>GREEN:<!--<span id="greenValue2"></span>-->
+                <input type=number min="0" max="255" value="255" id="greenInput2">
+                <input type="range" min="0" max="255" value="0" id="greenSlider2">
+            </p>
+            <p>BLUE:<!--<span id="blueValue2"></span>-->
+                <input type=number min="0" max="255" value="255" id="blueInput2">
+                <input type="range" min="0" max="255" value="0" id="blueSlider2">
+            </p>
+        </div>
+    </div>
+<div class="grid-container">
+  <div class="color-in" id="color-in">
+      <div class="color-in2" id="color-in2">
+          
+      </div>
+  </div>
+  <div class="color-side" id="color-side">
+      <div class="color-side1" id="color-side1"></div>
+      <div class="color-side2" id="color-side2"></div>
+  </div>
+  <div class="color-text" id="color-text">
+      <p id="color-text2">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt...</p>
+  </div>
+</div>
+
+<script>
+    //slider1
+    var sliderRed = document.getElementById("redSlider");
+    //var valueRed = document.getElementById("redValue");
+    var sliderGreen = document.getElementById("greenSlider");
+    //var valueGreen = document.getElementById("greenValue");
+    var sliderBlue = document.getElementById("blueSlider");
+    //var valueBlue = document.getElementById("blueValue");
+
+    //slider2
+    var sliderRed2 = document.getElementById("redSlider2");
+    //var valueRed2 = document.getElementById("redValue2");
+    var sliderGreen2 = document.getElementById("greenSlider2");
+    //var valueGreen2 = document.getElementById("greenValue2");
+    var sliderBlue2 = document.getElementById("blueSlider2");
+    //var valueBlue2 = document.getElementById("blueValue2");
+
+
+    var inputRed = document.getElementById("redInput")
+    var inputGreen = document.getElementById("greenInput")
+    var inputBlue = document.getElementById("blueInput")
+    var inputRed2 = document.getElementById("redInput2")
+    var inputGreen2 = document.getElementById("greenInput2")
+    var inputBlue2 = document.getElementById("blueInput2")
+
+
+
+    //valueRed.innerHTML = sliderRed.value;
+    //valueGreen.innerHTML = sliderGreen.value;
+    //valueBlue.innerHTML = sliderBlue.value;
+
+    //valueRed2.innerHTML = sliderRed2.value;
+    //valueGreen2.innerHTML = sliderGreen2.value;
+    //valueBlue2.innerHTML = sliderBlue2.value;
+
+    inputRed.value = sliderRed.value 
+    inputGreen.value = sliderGreen.value
+    inputBlue.value = sliderBlue.value
+
+    inputRed2.value = sliderRed2.value
+    inputGreen2.value = sliderGreen2.value
+    inputBlue2.value = sliderBlue2.value
+
+    ChangeColors()
+    
+    sliderRed.oninput = function() {
+        //valueRed.innerHTML = this.value;
+        inputRed.value = this.value;
+        ChangeColors()
+    }
+    sliderGreen.oninput = function() {
+        //valueGreen.innerHTML = this.value;
+        inputGreen.value = this.value;
+        ChangeColors()
+    }
+    sliderBlue.oninput = function() {
+        //valueBlue.innerHTML = this.value;
+        inputBlue.value = this.value;
+        ChangeColors()
+    }
+
+    sliderRed2.oninput = function() {
+        //valueRed2.innerHTML = this.value;
+        inputRed2.value = this.value;
+        ChangeColors()
+    }
+    sliderGreen2.oninput = function() {
+        //valueGreen2.innerHTML = this.value;
+        inputGreen2.value = this.value
+        ChangeColors()
+    }
+    sliderBlue2.oninput = function() {
+        //valueBlue2.innerHTML = this.value;
+        inputBlue2.value = this.value;
+        ChangeColors()
+    }
+
+    inputRed.oninput = function(){
+        //valueRed.innerHTML = this.value;
+        sliderRed.value = this.value;
+        ChangeColors()
+    }
+
+    inputGreen.oninput = function(){
+        //valueGreen.innerHTML = this.value;
+        sliderGreen.value = this.value;
+        ChangeColors()
+    }
+
+    inputBlue.oninput = function(){
+        //valueBlue.innerHTML = this.value;
+        sliderBlue.value = this.value;
+        ChangeColors()
+    }
+
+    inputRed2.oninput = function(){
+        //valueRed2.innerHTML = this.value;
+        sliderRed2.value = this.value;
+        ChangeColors()
+    }
+
+    inputGreen2.oninput = function(){
+        //valueGreen2.innerHTML = this.value;
+        sliderGreen2.value = this.value;
+        ChangeColors()
+    }
+
+    inputBlue2.oninput = function(){
+        //valueBlue2.innerHTML = this.value;
+        sliderBlue2.value = this.value;
+        ChangeColors()
+    }
+
+
+    function ChangeColors(){
+        var color1 = `rgb(${inputRed.value},${inputGreen.value},${inputBlue.value})`;
+        var color2 = `rgb(${inputRed2.value},${inputGreen2.value},${inputBlue2.value})`;
+
+        //color in
+        document.getElementById("color-in").style.backgroundColor = color1;
+        document.getElementById("color-in2").style.backgroundColor = color2;
+
+        //color-side1
+        document.getElementById("color-side1").style.backgroundColor = color1;
+        document.getElementById("color-side2").style.backgroundColor = color2;
+
+        //color-text
+        document.getElementById("color-text").style.backgroundColor = color1;
+        document.getElementById("color-text2").style.color = color2;
+
+        document.getElementById("view-color1").style.backgroundColor = color1;
+        document.getElementById("view-color2").style.backgroundColor = color2;
+
+    }
+</script>
+
+</body>
+</html>
